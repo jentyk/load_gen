@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.vodafone.com/VFGroup-NetworkArchitecture-NAAP/NaaP_Git_Hooks
+    rev: v1.0.4
+    hooks:
+      - id: commitizen
+      - id: ref_control
+      - id: type_control
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: no-commit-to-branch
+        args: [ '--branch', 'master' ]

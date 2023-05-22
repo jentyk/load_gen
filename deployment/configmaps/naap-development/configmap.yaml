@@ -1,0 +1,43 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: load-generator-config
+  labels:
+    contact.productowner: victor.fernandez_at_vodafone.com
+    contact.deployment: naapdevops_at_vodafone.com
+    contact.team: naapdev_at_vodafone.com
+    environment.type: DEV
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    contact.support: '+447748106038'
+    microservice.name: naap_load_generator
+    microservice.repository: https://github.vodafone.com/VFGroup-NetworkArchitecture-NAAP/load-generator.git
+    microservice.documentation: https://confluence.sp.vodafone.com/display/NAAP/load-generator
+data:
+  config.py: |
+    REQUESTS = (
+        {
+            "url": "http://dynamic-bandwidth-es.naap-development.svc.cluster.local:8080/"
+            "dynamicbandwidth/v1/subscribers/34600585500/bandwidthRules",
+            "http_method": "GET",
+            "headers": {},
+            "data": {},
+        },
+        {
+            "url": "http://dynamic-bandwidth-es.naap-development.svc.cluster.local:8080/"
+            "dynamicbandwidth/v1/subscribers/34600585500/bandwidthRules",
+            "http_method": "GET",
+            "headers": {},
+            "data": {},
+        },
+    )
+    
+    FREQUENCY = 1
+    
+    RANDOMIZE_FREQUENCY = True
+    
+    CONCURRENT = (1, 2, 3, 4, 5)
+    
+    LOG_LEVEL = "INFO"
