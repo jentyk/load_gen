@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: load-generator-api-egress-policy
+  labels:
+    contact.productowner: victor.fernandez_at_vodafone.com
+    contact.deployment: naapdevops_at_vodafone.com
+    contact.team: naapdev_at_vodafone.com
+    environment.type: STAGING
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    contact.support: '+447748106038'
+    microservice.name: naap_load_generator
+    microservice.repository: https://github.vodafone.com/VFGroup-NetworkArchitecture-NAAP/load-generator.git
+    microservice.documentation: https://confluence.sp.vodafone.com/display/NAAP/load-generator
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app: load-generator
+  egress:
+    - {}

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    contact.productowner: victor.fernandez_at_vodafone.com
+    contact.deployment: naapdevops_at_vodafone.com
+    contact.team: naapdev_at_vodafone.com
+    environment.type: DEV
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    contact.support: '+447748106038'
+    microservice.name: naap_load_generator
+    microservice.repository: https://github.vodafone.com/VFGroup-NetworkArchitecture-NAAP/load-generator.git
+    microservice.documentation: https://confluence.sp.vodafone.com/display/NAAP/load-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+        - image: 507653421664.dkr.ecr.eu-central-1.amazonaws.com/naap-internal-dev:dev.4-load-generator-1.0.0-ga29bfb
+          name: load-generator
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 200m
+              memory: 250Mi
+            limits:
+              cpu: 200m
+              memory: 250Mi
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config/config.py
+              subPath: "config.py"
+      volumes:
+        - name: app-config
+          configMap:
+            name: load-generator-config
