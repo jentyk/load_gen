@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyyaml = "*"
+httpx = "*"
+
+[dev-packages]
+flake8 = "*"
+flake8-docstrings = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
+commitizen = "*"
+python-semantic-release = "*"
+pytest-asyncio = "*"
+pytest-httpx = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.3"

@@ -1,0 +1,37 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: load-generator-config
+  labels:
+    environment.type: STAGING
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    microservice.name: load_generator
+data:
+  config.py: |
+    REQUESTS = (
+        {
+            "url": "http://db.staging.svc.cluster.local:8080/"
+            "v1/subscribers/xxx/bandwidthRules",
+            "http_method": "GET",
+            "headers": {},
+            "data": {},
+        },
+        {
+            "url": "http://db.staging.svc.cluster.local:8080/"
+            "v1/subscribers/xxx/bandwidthRules",
+            "http_method": "GET",
+            "headers": {},
+            "data": {},
+        },
+    )
+    
+    FREQUENCY = 1
+    
+    RANDOMIZE_FREQUENCY = True
+    
+    CONCURRENT = (1, 2, 3, 4, 5)
+    
+    LOG_LEVEL = "INFO"

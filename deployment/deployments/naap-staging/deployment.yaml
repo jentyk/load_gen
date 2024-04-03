@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator
+  labels:
+    environment.type: STAGING
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    microservice.name: load_generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator
+  template:
+    metadata:
+      labels:
+        app: load-generator
+    spec:
+      containers:
+        - image: 507653421664.amazonaws.com/internal-dev:dev.5-load-generator-1.0.0-g7cc830
+          name: load-generator
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 200m
+              memory: 250Mi
+            limits:
+              cpu: 200m
+              memory: 250Mi
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config/config.py
+              subPath: "config.py"
+      volumes:
+        - name: app-config
+          configMap:
+            name: load-generator-config

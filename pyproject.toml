@@ -1,0 +1,13 @@
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+
+[tool.semantic_release]
+version_source = "tag_only"
+prerelease_tag = "alpha"

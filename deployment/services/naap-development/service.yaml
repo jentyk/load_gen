@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: load-generator
+  labels:
+    environment.type: DEV
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    microservice.name: load_generator
+spec:
+  type: ClusterIP
+  selector:
+    app: load-generator

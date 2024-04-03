@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: load-generator-api-egress-policy
+  labels:
+    environment.type: DEV
+    environment.up: '09'
+    environment.down: '15'
+    microservice.localmarket: GROUP
+  annotations:
+    microservice.name: load_generator
+spec:
+  policyTypes:
+    - Egress
+  podSelector:
+    matchLabels:
+      app: load-generator
+  egress:
+    - {}
