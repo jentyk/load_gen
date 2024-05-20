@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pyyaml = "*"
 httpx = "*"
+uvloop = "*"
 
 [dev-packages]
 flake8 = "*"

@@ -1,4 +1,5 @@
 """Constant load generator."""
+
 import asyncio
 import logging
 import random
@@ -7,6 +8,7 @@ from collections import Counter
 from itertools import cycle
 
 import httpx
+import uvloop
 import yaml
 
 from config import config
@@ -14,6 +16,8 @@ from config import config
 logging.basicConfig(
     level=config.LOG_LEVEL.upper(), format="%(asctime)s %(levelname)s %(message)s"
 )
+
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 
 class Loader:
